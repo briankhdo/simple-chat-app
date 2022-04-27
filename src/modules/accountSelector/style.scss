@@ -1,0 +1,38 @@
+.AccountSelector {
+  text-align: center;
+  width: 400px;
+  margin: 0 auto;
+}
+
+.Account {
+  border: 1px solid #bbb;
+  border-radius: 3px;
+  padding: 10px;
+  text-align: left;
+  margin-bottom: 10px;
+
+  img {
+    width: 40px;
+    height: 40px;
+    opacity: 0.6;
+  }
+
+  .Avatar {
+    padding-right: 10px;
+  }
+
+  &:hover {
+    background-color: #eee;
+    cursor: pointer;
+  }
+}
+
+.Row {
+  display: flex;
+  flex-direction: row;
+}
+
+.Col {
+  display: flex;
+  flex-direction: column;
+}
