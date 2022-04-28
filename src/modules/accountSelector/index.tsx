@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { ClipLoader } from "react-spinners";
 
 import "./style.scss";
@@ -7,25 +7,18 @@ import Account from "./components/Account";
 
 import { useApi } from "../../utils/useApi";
 import { API_HOST } from "../../const";
+import { User } from "../../interfaces/user";
 
 const ACCOUNT_API = `${API_HOST}/api/users`;
-interface User {
-  id: number;
-  name: string;
-  email: string;
-}
 
-function AccountSelector(props: {
-  setAccountId: React.Dispatch<React.SetStateAction<number>>;
-}) {
+function AccountSelector(props: {}) {
   const [result, loading, loaded] = useApi<User[]>(ACCOUNT_API, false);
+
   return (
     <div className="AccountSelector">
       <Header />
-      <ClipLoader loading={loading as boolean} size={20} />
-      {loaded
-        ? result.map((account) => <Account account={account} {...props} />)
-        : null}
+      <ClipLoader loading={loading} size={20} />
+      {loaded ? result.map((user) => <Account user={user} {...props} />) : null}
     </div>
   );
 }

@@ -1,20 +1,15 @@
-import React, { useState } from "react";
+import React from "react";
+import { useDispatch } from "react-redux";
 import avatar from "../../../assets/images/avatar.svg";
+import { User } from "../../../interfaces/user";
+import { setCurrentUser } from "../reducers/usersSlice";
 
-interface User {
-  id: number;
-  name: string;
-  email: string;
-}
-
-function Account(props: {
-  account: User;
-  setAccountId: React.Dispatch<React.SetStateAction<number>>;
-}) {
-  const { account, setAccountId } = props;
+function Account(props: { user: User }) {
+  const { user } = props;
+  const dispatch = useDispatch();
 
   function selectAccount() {
-    setAccountId(account.id);
+    dispatch(setCurrentUser(user));
   }
 
   return (
@@ -26,11 +21,11 @@ function Account(props: {
         <div className="Col">
           <div className="Row">
             <div className="Col">
-              <strong>{account.name}</strong>
+              <strong>{user.name}</strong>
             </div>
           </div>
           <div className="Row">
-            <div className="Col">{account.email}</div>
+            <div className="Col">{user.email}</div>
           </div>
         </div>
       </div>

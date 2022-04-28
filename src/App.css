@@ -36,3 +36,13 @@
     transform: rotate(360deg);
   }
 }
+
+.Row {
+  display: flex;
+  flex-direction: row;
+}
+
+.Col {
+  display: flex;
+  flex-direction: column;
+}

@@ -1,24 +1,14 @@
 import "./App.css";
-import React, { useState } from "react";
+import React from "react";
+import { useSelector } from "react-redux";
 
 import AccountSelector from "./modules/accountSelector/index";
+import { currentUserSelector } from "./modules/accountSelector/reducers/usersSlice";
+import Conversation from "./modules/conversation";
 
 function App() {
-  const [accountId, setAccountId] = useState<number>(0);
-
-  function switchAccount() {
-    setAccountId(0);
-  }
-
-  return (
-    <>
-      {accountId === 0 ? (
-        <AccountSelector setAccountId={setAccountId} />
-      ) : (
-        <button onClick={switchAccount}>Switch Account</button>
-      )}
-    </>
-  );
+  const currentUser = useSelector((state) => currentUserSelector(state));
+  return <>{!currentUser ? <AccountSelector /> : <Conversation />}</>;
 }
 
 export default App;
