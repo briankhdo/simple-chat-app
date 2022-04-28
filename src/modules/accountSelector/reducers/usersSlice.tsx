@@ -1,8 +1,6 @@
 import { createSlice, createSelector } from "@reduxjs/toolkit";
 
 const initialState = {
-  users: [],
-  usersLoading: false,
   currentUser: null,
 };
 
@@ -10,22 +8,10 @@ const usersSlice = createSlice({
   name: "accounts",
   initialState,
   reducers: {
-    setUsers(state, action) {
-      return {
-        ...state,
-        users: action.payload,
-      };
-    },
     setCurrentUser(state, action) {
       return {
         ...state,
         currentUser: action.payload,
-      };
-    },
-    usersLoading(state, _action) {
-      return {
-        ...state,
-        usersLoading: true,
       };
     },
   },
@@ -37,15 +23,6 @@ export const currentUserSelector = createSelector(
   (currentUser) => currentUser
 );
 
-const selectUsers = (state) => state.users.currentUser;
-export const usersSelector = createSelector(selectUsers, (users) => users);
-
-const selectUserLoading = (state) => state.users.usersLoading;
-export const usersLoadingSelector = createSelector(
-  selectUserLoading,
-  (userLoading) => userLoading
-);
-
-export const { setUsers, setCurrentUser, usersLoading } = usersSlice.actions;
+export const { setCurrentUser } = usersSlice.actions;
 
 export default usersSlice.reducer;

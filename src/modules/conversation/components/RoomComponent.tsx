@@ -2,7 +2,7 @@ import React from "react";
 import { useDispatch } from "react-redux";
 import avatar from "../../../assets/images/avatar.svg";
 import { Room } from "../../../interfaces/room";
-import { setCurrentRoom } from "../../accountSelector/reducers/roomsSlice";
+import { setCurrentRoom } from "../reducers/roomsSlice";
 
 const RoomComponent = (props: { room: Room }) => {
   const { room } = props;
