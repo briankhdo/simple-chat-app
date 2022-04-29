@@ -1,7 +1,7 @@
 import { useState, useEffect, useCallback } from "react";
 import axios from "axios";
 
-export function useApi<T>(url: string, onCompleted: Function = null) {
+export function usePostApi<T>(url: string, data: {}, onCompleted: Function) {
   const [result, setResult] = useState<T>();
   const [loading, setLoading] = useState<boolean>(false);
   const [loaded, setLoaded] = useState<boolean>(false);
@@ -12,9 +12,13 @@ export function useApi<T>(url: string, onCompleted: Function = null) {
     setRefreshIndex(refreshIndex + 1);
   };
 
-  const fetchData = useCallback(() => {
+  const postData = useCallback(() => {
     axios
-      .get<T>(url)
+      .post<T>(url, data, {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      })
       .then((r) => {
         setResult(r.data);
         setLoading(false);
@@ -29,12 +33,12 @@ export function useApi<T>(url: string, onCompleted: Function = null) {
           setError(error.message);
         }
       });
-  }, [onCompleted, url]);
+  }, [data, onCompleted, url]);
 
   useEffect(() => {
     setLoading(true);
-    fetchData();
-  }, [url, refreshIndex, fetchData]);
+    postData();
+  }, [url, refreshIndex, data, onCompleted, postData]);
 
-  return { result, loading, loaded, fetchData, error, refresh, setResult };
+  return { result, loading, loaded, postData, error, refresh, setResult };
 }

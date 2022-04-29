@@ -1,5 +1,4 @@
 import React from "react";
-import ComposeMessage from "./ComposeMessage";
 import Messages from "./Messages";
 import RoomInformation from "./RoomInformation";
 
@@ -8,7 +7,6 @@ const ConversationBox = () => {
     <div className="Col">
       <RoomInformation />
       <Messages />
-      <ComposeMessage />
     </div>
   );
 };

@@ -1,26 +1,22 @@
 import React from "react";
-import { ClipLoader } from "react-spinners";
+import { useNavigate } from "react-router-dom";
 
-import { useApi } from "../../../utils/useApi";
-import { API_HOST } from "../../../const";
-import { Room } from "../../../interfaces/room";
 import RoomComponent from "./RoomComponent";
-import { useDispatch } from "react-redux";
-import { setCurrentUser } from "../../accountSelector/reducers/usersSlice";
-
-const ROOM_API = `${API_HOST}/api/rooms`;
+import { useSelector } from "react-redux";
+import { roomsSelector } from "../reducers/roomsSlice";
 
 const AccountSelector = (props: {}) => {
-  const [rooms, loading, loaded] = useApi<Room[]>(ROOM_API, false);
-  const dispatch = useDispatch();
+  const rooms = useSelector((state) => roomsSelector(state));
+
+  const navigate = useNavigate();
 
   function clearCurrentUser() {
-    dispatch(setCurrentUser(null));
+    navigate(`/`);
   }
 
   return (
-    <div className="Rooms">
-      <div className="Row">
+    <div className="Rooms Col" style={{ flexGrow: 1 }}>
+      <div className="Row mb-1">
         <div className="Col">
           <button onClick={clearCurrentUser}>Back</button>
         </div>
@@ -28,12 +24,11 @@ const AccountSelector = (props: {}) => {
           <input type="text" placeholder="Search" />
         </div>
       </div>
-      <div className="Row">
+      <div className="Row" style={{ flexGrow: 1 }}>
         <div className="Col">
-          <ClipLoader loading={loading} size={20} />
-          {loaded
-            ? rooms.map((room) => <RoomComponent room={room} {...props} />)
-            : null}
+          {rooms.map((room) => (
+            <RoomComponent room={room} {...props} />
+          ))}
         </div>
       </div>
     </div>

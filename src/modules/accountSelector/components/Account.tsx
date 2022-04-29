@@ -1,21 +1,21 @@
 import React from "react";
-import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
+
 import avatar from "../../../assets/images/avatar.svg";
 import { User } from "../../../interfaces/user";
-import { setCurrentUser } from "../reducers/usersSlice";
 
 function Account(props: { user: User }) {
   const { user } = props;
-  const dispatch = useDispatch();
+  let navigate = useNavigate();
 
   function selectAccount() {
-    dispatch(setCurrentUser(user));
+    navigate(`/users/${user.id}/rooms`);
   }
 
   return (
     <div className="Account" onClick={selectAccount}>
       <div className="Row">
-        <div className="Col Avatar">
+        <div className="Col Avatar" style={{ flexGrow: 0, width: 40 }}>
           <img src={avatar} alt="A" />
         </div>
         <div className="Col">

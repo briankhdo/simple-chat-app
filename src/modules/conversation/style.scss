@@ -1,0 +1,76 @@
+.Room {
+  border: 1px solid #bbb;
+  border-radius: 3px;
+  padding: 10px;
+  text-align: left;
+  margin-bottom: 10px;
+  box-sizing: border-box;
+
+  img {
+    width: 40px;
+    height: 40px;
+    opacity: 0.6;
+  }
+
+  .Avatar {
+    padding-right: 10px;
+  }
+
+  &:hover,
+  &.Selected {
+    background-color: #eee;
+    cursor: pointer;
+  }
+}
+
+.Messages {
+  flex-direction: column-reverse;
+  height: calc(100vh - 100px);
+  overflow: scroll;
+}
+
+.Room-Information {
+  height: 50px;
+
+  .Col {
+    flex-direction: row;
+  }
+
+  img {
+    width: 40px;
+    height: 40px;
+    opacity: 0.6;
+
+    &:not(:first-child) {
+      margin-left: -10px;
+      background-color: white;
+      border-radius: 20px;
+    }
+  }
+}
+
+p {
+  margin-top: 0;
+}
+
+.Message {
+  direction: rtl;
+
+  > .Col {
+    padding: 0px 5px;
+  }
+
+  &.Current {
+    direction: ltr;
+  }
+
+  img {
+    width: 40px;
+    height: 40px;
+    opacity: 0.6;
+  }
+}
+
+button {
+  height: 22px;
+}

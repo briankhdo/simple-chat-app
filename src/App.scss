@@ -1,3 +1,17 @@
+html {
+  height: 100%;
+}
+
+body {
+  padding: 20px;
+  height: calc(100%);
+  box-sizing: border-box;
+}
+
+#root {
+  height: 100%;
+}
+
 .App {
   text-align: center;
 }
@@ -40,9 +54,41 @@
 .Row {
   display: flex;
   flex-direction: row;
+  width: 100%;
+  flex-flow: row wrap;
+  align-items: stretch;
+
+  &.Max-Height {
+    height: 100%;
+  }
 }
 
 .Col {
   display: flex;
   flex-direction: column;
+  flex-grow: 1;
+}
+
+.mb-1 {
+  margin-bottom: 10px;
+}
+
+.mb-2 {
+  margin-bottom: 20px;
+}
+
+.mt-1 {
+  margin-top: 10px;
+}
+
+.mt-2 {
+  margin-top: 20px;
+}
+
+.mr-1 {
+  margin-right: 10px;
+}
+
+.mr-2 {
+  margin-right: 20px;
 }

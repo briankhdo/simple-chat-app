@@ -1,4 +1,4 @@
-import { createSlice, createSelector } from "@reduxjs/toolkit";
+import { createSlice, createSelector, current } from "@reduxjs/toolkit";
 
 const initialState = {
   rooms: [],
@@ -9,6 +9,12 @@ const roomsSlice = createSlice({
   name: "rooms",
   initialState,
   reducers: {
+    setRooms(state, action) {
+      return {
+        ...state,
+        rooms: action.payload,
+      };
+    },
     setCurrentRoom(state, action) {
       return {
         ...state,
@@ -18,21 +24,15 @@ const roomsSlice = createSlice({
   },
 });
 
-const selectCurrentRoom = (state) => state.users.currentRoom;
+const selectRooms = (state) => state.rooms.rooms;
+export const roomsSelector = createSelector(selectRooms, (rooms) => rooms);
+
+const selectCurrentRoom = (state) => state.rooms.currentRoom;
 export const currentRoomSelector = createSelector(
   selectCurrentRoom,
   (currentRoom) => currentRoom
 );
 
-const selectUsers = (state) => state.users.currentUser;
-export const usersSelector = createSelector(selectUsers, (users) => users);
-
-const selectUserLoading = (state) => state.users.usersLoading;
-export const usersLoadingSelector = createSelector(
-  selectUserLoading,
-  (userLoading) => userLoading
-);
-
-export const { setCurrentRoom } = roomsSlice.actions;
+export const { setRooms, setCurrentRoom } = roomsSlice.actions;
 
 export default roomsSlice.reducer;
