@@ -17,8 +17,8 @@ const RoomInformation = () => {
   return (
     <div className="Row Room-Information">
       <div className="Col" style={{ flexGrow: 0, width: 110 }}>
-        {currentRoom.user_names.map(() => (
-          <img src={avatar} alt="A" />
+        {currentRoom.user_names.map((username, index) => (
+          <img src={avatar} alt="A" key={`avatar-${index}`} />
         ))}
       </div>
       <div className="Col" style={{ flexGrow: 1 }}>

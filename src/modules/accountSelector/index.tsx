@@ -1,19 +1,20 @@
 import React from "react";
-import { ClipLoader } from "react-spinners";
 
 import "./style.scss";
 import Header from "./components/Header";
 import Account from "./components/Account";
 
-import { useGetUsers } from "../../utils/apis";
+import { usersSelector } from "./reducers/usersSlice";
+import { useSelector } from "react-redux";
 
 function AccountSelector(props: {}) {
-  const { result: users, loading, loaded } = useGetUsers();
+  const users = useSelector((state) => usersSelector(state));
   return (
     <div className="AccountSelector">
       <Header />
-      <ClipLoader loading={loading} size={20} />
-      {loaded ? users.map((user) => <Account user={user} {...props} />) : null}
+      {users.map((user) => (
+        <Account key={`user-${user.id}`} user={user} {...props} />
+      ))}
     </div>
   );
 }

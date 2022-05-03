@@ -12,29 +12,32 @@ export function useApi<T>(url: string, onCompleted: Function = null) {
     setRefreshIndex(refreshIndex + 1);
   };
 
-  const fetchData = useCallback(() => {
-    axios
-      .get<T>(url)
-      .then((r) => {
-        setResult(r.data);
-        setLoading(false);
-        setLoaded(true);
-        if (onCompleted) onCompleted();
-      })
-      .catch((error) => {
-        setLoading(false);
-        if (error.response) {
-          setError(error.response.data);
-        } else {
-          setError(error.message);
-        }
-      });
-  }, [onCompleted, url]);
+  const fetchData = useCallback(
+    (params) => {
+      axios
+        .get<T>(url, { params })
+        .then((r) => {
+          setResult(r.data);
+          setLoading(false);
+          setLoaded(true);
+          if (onCompleted) onCompleted();
+        })
+        .catch((error) => {
+          setLoading(false);
+          if (error.response) {
+            setError(error.response.data);
+          } else {
+            setError(error.message);
+          }
+        });
+    },
+    [onCompleted, url]
+  );
 
   useEffect(() => {
     setLoading(true);
-    fetchData();
+    fetchData({});
   }, [url, refreshIndex, fetchData]);
 
-  return { result, loading, loaded, fetchData, error, refresh, setResult };
+  return { result, loading, loaded, fetchData, setResult, error, refresh };
 }
