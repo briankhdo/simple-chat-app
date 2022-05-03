@@ -31,3 +31,9 @@ cd simple-chat-app && npm start
 ```
 cd simple-chat-api && bundle exec rails s  -p 4000
 ```
+
+# Demo
+
+
+https://user-images.githubusercontent.com/8332688/166478157-5200c78e-017d-4668-abbc-efe3072d3096.mp4
+
